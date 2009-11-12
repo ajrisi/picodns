@@ -1,0 +1,56 @@
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# 
+#   Copyright (C) Adam Risi
+
+#this is the main records file for use with picodns. The examples
+#below show the general functionality of creating records. There are a
+#couple of features in this file that are available to make your life
+#easier:
+#  *Commenting with # signs
+#  *C style commenting with /* */ as well as //
+#  *include("filename.pdns") function to include other configuration files
+#
+#Currently, the only supported record types are A, AAAA, and MX. More
+#will be added later (or on request)
+
+#this is a simple example of an A type record (as denoted by a_record)
+#in this case, all of the values settable are set. "class" could have
+#been omitted (IN is used by default). What this record shows is that
+#if a DNS question is issued for "myrecord.com" of type A, then the IP
+#that will come back is 127.0.0.1. the name my_record is used for logging
+
+a_record my_record {
+  class = "IN"
+  host = "picodns_test.com"
+  answer {
+    TTL = 3600
+    addr = "127.0.0.1"
+  }
+  answer {
+    TTL = 3600
+    addr = "127.0.0.2"
+  }
+}   
+
+
+#includes are used below to include single files for specific record types
+#note that the include works here the same way as it works in a C program,
+#so in reality, there is no limitation in terms of what record types are 
+#placed where, it is just done that way for organizational purposes
+
+include("a_records.pdns")
+include("aaaa_records.pdns")
+include("mx_records.pdns")
+
+     

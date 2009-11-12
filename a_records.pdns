@@ -1,0 +1,64 @@
+#   This program is free software: you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation, either version 3 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# 
+#   Copyright (C) Adam Risi
+
+#an example A type record (commented out)
+/*
+  a_record example_a_record {
+    class = "IN"
+    host = "myrecord2.com"
+    answer {
+      TTL = 3600
+      addr = "127.0.0.1"
+    }
+  } 
+*/ 
+
+#in this example, we show that a record can be marked as authoratative
+#and/or authenticated. here, we do both
+a_record auths_example {
+  class = "IN"
+  host = "picodns_test2.com"
+  authenticated = true
+  authoratative = true
+  answer {
+    TTL = 3600
+    addr = "127.0.0.1"
+  }
+} 
+
+#here, we show that the requirement for authentication by the client
+#can be ignored, and a reply that is not authenticated can be sent
+a_record ignore_auths_example {
+  class = "IN"
+  host = "picodns_test3.com"
+  ignore_authentication = true
+  answer {
+    TTL = 3600
+    addr = "127.0.0.1"
+  }
+} 
+
+#here is an example where auto_ptr is used to enable the automatic
+#enabling of a reverse dns lookup using the PTR type
+a_record ignore_auths_example {
+  class = "IN"
+  host = "picodns_test3.com"
+  ignore_authentication = true
+  answer {
+    TTL = 3600
+    addr = "123.123.123.123"
+    auto_ptr = true
+  }
+} 
